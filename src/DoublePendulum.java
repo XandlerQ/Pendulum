@@ -165,26 +165,26 @@ public class DoublePendulum {
 
     double omega1Derivative(double theta1, double theta2, double omega1, double omega2) {
         return (
-                        - App.G * (2 * this.firstPendulum.getMass() + this.secondPendulum.getMass()) * Math.sin(theta1)
-                        - this.secondPendulum.getMass() * App.G * Math.sin(theta1 - 2 * theta2)
-                        - 2 * Math.sin(theta1 - theta2) * this.secondPendulum.getMass() * (omega2 * omega2 * this.secondPendulum.getLength() + omega1 * omega1 * this.firstPendulum.getLength() * Math.cos(theta1 - theta2))
+                        9 * omega1 * omega1 * this.firstPendulum.getLength() * this.secondPendulum.getMass() * Math.sin(2 * theta1 - 2 * theta2)
+                        + 12 * this.secondPendulum.getMass() * this.secondPendulum.getLength() * omega2 * omega2 * Math.sin(theta1 - theta2)
+                        + 12 * (3 * Math.sin(- 2 * theta2 + theta1) * this.secondPendulum.getMass() / 4 + Math.sin(theta1) * (this.firstPendulum.getMass() + 5 * this.secondPendulum.getMass() / 4)) * App.G
+
                 )
                 / (
-                        this.firstPendulum.getLength() * (2 * this.firstPendulum.getMass() + this.secondPendulum.getMass() - this.secondPendulum.getMass() * Math.cos(2 * theta1 - 2 * theta2))
+                        this.firstPendulum.getLength() * (9 * this.secondPendulum.getMass() * Math.cos(2 * theta1 - 2 * theta2) - 8 * this.firstPendulum.getMass() - 15 * this.secondPendulum.getMass())
                 );
     }
 
     double omega2Derivative(double theta1, double theta2, double omega1, double omega2) {
         return (
-                2 * Math.sin(theta1 - theta2) * (
-                                omega1 * omega1 * this.firstPendulum.getLength() * (this.firstPendulum.getMass() + this.secondPendulum.getMass())
-                                + App.G * (this.firstPendulum.getMass() + this.secondPendulum.getMass()) * Math.cos(theta1)
-                                + omega2 * omega2 * this.secondPendulum.getLength() * this.secondPendulum.getMass() * Math.cos(theta1 - theta2)
-                        )
-        )
+                        - 9 * App.G * Math.sin(2 * theta1 - theta2) * (this.firstPendulum.getMass() + 2 * this.secondPendulum.getMass())
+                        - 9 * this.secondPendulum.getMass() * this.secondPendulum.getLength() * omega2 * omega2 * Math.sin(2 * theta1 - 2 * theta2)
+                        - 12 * this.firstPendulum.getLength() * omega1 * omega1 * (this.firstPendulum.getMass() + 3 * this.secondPendulum.getMass()) * Math.sin(theta1 - theta2)
+                        + 3 * App.G * Math.sin(theta2) * (this.firstPendulum.getMass() + 6 * this.secondPendulum.getMass())
+                )
                 / (
-                this.firstPendulum.getLength() * (2 * this.firstPendulum.getMass() + this.secondPendulum.getMass() - this.secondPendulum.getMass() * Math.cos(2 * theta1 - 2 * theta2))
-        );
+                        this.secondPendulum.getLength() * (9 * this.secondPendulum.getMass() * Math.cos(2 * theta1 - 2 * theta2) - 8 * this.firstPendulum.getMass() - 15 * this.secondPendulum.getMass())
+                );
     }
 
     double theta1Derivative(double omega1) {
@@ -196,12 +196,19 @@ public class DoublePendulum {
     }
 
     void render() {
-        this.firstPendulum.render();
-        this.secondPendulum.render();
-        this.theta1Graph.render();
-        this.theta2Graph.render();
-        this.omega1Graph.render();
-        this.omega2Graph.render();
+        if(App.renderType == 0) {
+            App.processingRef.background(0);
+            this.firstPendulum.render();
+            this.secondPendulum.render();
+            this.theta1Graph.render();
+            this.theta2Graph.render();
+            this.omega1Graph.render();
+            this.omega2Graph.render();
+        }
+        else if(App.renderType == 1) {
+            App.processingRef.stroke(Color.WHITE.getRGB());
+            App.processingRef.circle((float)this.secondPendulum.getEndDot().getX(), (float)this.secondPendulum.getEndDot().getY(), 1);
+        }
     }
 
 }
