@@ -11,7 +11,7 @@ public class App extends PApplet{
     public Pandemonium pandemonium;
     public static double G = 9.81;
     public void settings() {
-        size(1500, 1000);
+        size(2000, 1000);
     }
 
     public void setup() {
@@ -19,15 +19,16 @@ public class App extends PApplet{
         frameRate(1000);
         processingRef = this;
         this.pandemonium = new Pandemonium("problem.json");
+        if (this.pandemonium.isExc()) return;
         this.pandemonium.solve();
     }
 
     public void draw() {
-        this.pandemonium.animate();
+        if (!this.pandemonium.isExc()) this.pandemonium.animate();
     }
 
     public void mouseClicked() {
-        background(0);
+        this.pandemonium.resetAnimationTick();
     }
 
     public static void main(String[] args) {

@@ -62,7 +62,7 @@ public class TimeGraph {
         this.integer = false;
         this.dots = new ArrayList<Dot>();
         this.scaleSynchronizer = null;
-        this.maxY = 0;
+        this.maxY = Double.MIN_VALUE;
         this.minY = Double.MAX_VALUE;
         this.textSize = 12;
     }
@@ -217,6 +217,13 @@ public class TimeGraph {
     //-----------  Methods  -----------
     //---------------------------------
 
+
+    void clear() {
+        this.dots = new ArrayList<>();
+        this.maxY = Double.MIN_VALUE;
+        this.minY = Double.MAX_VALUE;
+        this.filled = false;
+    }
     void addValue(double val) {
 
         Dot newDot = new Dot(App.processingRef.millis() / 1000., val);
@@ -382,7 +389,7 @@ public class TimeGraph {
     void renderAxisScale() {
         App.processingRef.fill(this.scaleTextCl.getRGB());
         App.processingRef.textSize(this.textSize);
-        App.processingRef.text(App.processingRef.millis()/1000, this.originX + this.dimX - (this.textSize + 20), this.originY + this.dimY - (this.textSize - 4));
+        //App.processingRef.text(App.processingRef.millis()/1000, this.originX + this.dimX - (this.textSize + 20), this.originY + this.dimY - (this.textSize - 4));
         if (this.integer) {
             App.processingRef.text((int) (this.maxY + 0.25 * (this.maxY - this.minY)), this.originX + 5, this.originY + this.textSize + 4);
             App.processingRef.text((int) (this.minY), this.originX + 5, this.originY + this.dimY - (this.textSize - 4));

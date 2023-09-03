@@ -1,0 +1,22 @@
+{
+	"title" : "Double compound pendulum",
+	"segments" : [
+		{
+			"length" : 150,
+			"mass" : 20,
+			"theta" : 1.5707963267948966192313216,
+			"omega" : 0
+		},
+		{
+			"length" : 150,
+			"mass" : 20,
+			"theta" : 1.5707963267948966192313216,
+			"omega" : 0
+		}
+	],
+	"solver" : {
+		"type" : "Runge-Kutta",
+		"dt" : 0.01,
+		"T" : 40
+	}
+}

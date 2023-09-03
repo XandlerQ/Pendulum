@@ -5,21 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2aae3bae-2380-4847-8b1b-2a0f52d7115a" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/EulerSolver.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Initializer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Pandemonium.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/PojoSegment.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/PojoSolver.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/RungeKuttaSolver.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Pendulum/App.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Pendulum/App.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Pendulum/DoublePendulum.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Pendulum/DoublePendulum.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Pendulum/POJOProblem.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Pendulum/POJOProblem.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Pendulum/Pendulum.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Pendulum/Pendulum.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Pendulum/TimeGraph.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Pendulum/TimeGraph.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DoublePendulum.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DoublePendulum.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/POJOProblem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PojoProblem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Pendulum.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pendulum.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Initializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Initializer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Pandemonium.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pandemonium.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TimeGraph.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TimeGraph.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -74,5 +66,16 @@
       <updated>1693647789674</updated>
     </task>
     <servers />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Initializer.java</url>
+          <line>30</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
