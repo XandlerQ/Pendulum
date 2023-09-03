@@ -27,12 +27,8 @@ public class Pendulum {
     }
 
     public Pendulum(Dot fix, double length, double mass, double theta, double omega) {
+        this(length, mass, theta, omega);
         this.fix = fix;
-        this.length = length;
-        this.mass = mass;
-        this.theta = theta;
-        this.omega = omega;
-        this.color = new Color(255, 255, 255);
     }
 
     public void setFix(Dot fix) {
@@ -47,12 +43,12 @@ public class Pendulum {
         this.mass = mass;
     }
 
-    public void setOmega(double omega) {
-        this.omega = omega;
-    }
-
     public void setTheta(double theta) {
         this.theta = normalizeDirection(theta);
+    }
+
+    public void setOmega(double omega) {
+        this.omega = omega;
     }
 
     public Dot getFix() {
@@ -67,12 +63,12 @@ public class Pendulum {
         return mass;
     }
 
-    public double getOmega() {
-        return omega;
-    }
-
     public double getTheta() {
         return theta;
+    }
+
+    public double getOmega() {
+        return omega;
     }
 
     public Dot getEndDot() {
