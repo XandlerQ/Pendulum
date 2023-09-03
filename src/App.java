@@ -3,7 +3,7 @@ import controlP5.*;
 
 public class App extends PApplet{
 
-    public static int renderType = 0;
+    public static int renderType = 1;
 
     public static PApplet processingRef;
     public DoublePendulum doublePendulum;
