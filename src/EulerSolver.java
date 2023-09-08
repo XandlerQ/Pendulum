@@ -5,6 +5,7 @@ public class EulerSolver {
     private ArrayList<Double> theta2;
     private ArrayList<Double> omega1;
     private ArrayList<Double> omega2;
+    private ArrayList<Double> energy;
     private DoublePendulum doublePendulum;
     private double T;
     private double timeStep;
@@ -14,6 +15,7 @@ public class EulerSolver {
         this.theta2 = new ArrayList<>();
         this.omega1 = new ArrayList<>();
         this.omega2 = new ArrayList<>();
+        this.energy = new ArrayList<>();
         this.doublePendulum = null;
         this.T = 0;
         this.timeStep = 0;
@@ -21,17 +23,21 @@ public class EulerSolver {
 
     public void setDoublePendulum(DoublePendulum doublePendulum) {
         this.doublePendulum = doublePendulum;
-    }
-
-    public void setInitialValues(double t1, double t2, double o1, double o2) {
         this.theta1.clear();
         this.theta2.clear();
         this.omega1.clear();
         this.omega2.clear();
-        this.theta1.add(t1);
-        this.theta2.add(t2);
-        this.omega1.add(o1);
-        this.omega2.add(o2);
+        this.energy.clear();
+        this.theta1.add(doublePendulum.getFirstPendulum().getTheta());
+        this.theta2.add(doublePendulum.getSecondPendulum().getTheta());
+        this.omega1.add(doublePendulum.getFirstPendulum().getOmega());
+        this.omega2.add(doublePendulum.getSecondPendulum().getOmega());
+        this.energy.add(calcEnergy(
+                doublePendulum.getFirstPendulum().getTheta(),
+                doublePendulum.getSecondPendulum().getTheta(),
+                doublePendulum.getFirstPendulum().getOmega(),
+                doublePendulum.getSecondPendulum().getOmega()
+        ));
     }
 
     public void setT(double t) {
@@ -58,6 +64,10 @@ public class EulerSolver {
         return omega2;
     }
 
+    public ArrayList<Double> getEnergy() {
+        return energy;
+    }
+
     void solve() {
         int steps = (int)(this.T / this.timeStep);
 
@@ -67,11 +77,31 @@ public class EulerSolver {
             double cOmega1 = this.omega1.get(iteration - 1);
             double cOmega2 = this.omega2.get(iteration - 1);
 
-            this.theta1.add(cTheta1 + this.timeStep * theta1Derivative(cOmega1));
-            this.theta2.add(cTheta2 + this.timeStep * theta2Derivative(cOmega2));
-            this.omega1.add(cOmega1 + this.timeStep * omega1Derivative(cTheta1, cTheta2, cOmega1, cOmega2));
-            this.omega2.add(cOmega2 + this.timeStep * omega2Derivative(cTheta1, cTheta2, cOmega1, cOmega2));
+            double theta1 = cTheta1 + this.timeStep * theta1Derivative(cOmega1);
+            double theta2 = cTheta2 + this.timeStep * theta2Derivative(cOmega2);
+            double omega1 = cOmega1 + this.timeStep * omega1Derivative(cTheta1, cTheta2, cOmega1, cOmega2);
+            double omega2 = cOmega2 + this.timeStep * omega2Derivative(cTheta1, cTheta2, cOmega1, cOmega2);
+
+            this.theta1.add(theta1);
+            this.theta2.add(theta2);
+            this.omega1.add(omega1);
+            this.omega2.add(omega2);
+
+            this.energy.add(calcEnergy(theta1, theta2, omega1, omega2));
         }
+    }
+
+    double calcEnergy(double theta1, double theta2, double omega1, double omega2) {
+        return (
+                this.doublePendulum.getFirstPendulum().getMass() * this.doublePendulum.getFirstPendulum().getLength() * this.doublePendulum.getFirstPendulum().getLength() * omega1 * omega1 / 6
+                        + this.doublePendulum.getSecondPendulum().getMass() * this.doublePendulum.getFirstPendulum().getLength() * this.doublePendulum.getFirstPendulum().getLength() * omega1 * omega1 / 2
+                        + this.doublePendulum.getSecondPendulum().getMass() * this.doublePendulum.getSecondPendulum().getLength() * this.doublePendulum.getSecondPendulum().getLength() * omega2 * omega2 / 6
+                        + this.doublePendulum.getSecondPendulum().getMass() * this.doublePendulum.getFirstPendulum().getLength() * this.doublePendulum.getSecondPendulum().getLength() * omega1 * omega2 * Math.cos(theta1 - theta2) / 2
+        ) + (
+                - this.doublePendulum.getFirstPendulum().getMass() * App.G * this.doublePendulum.getFirstPendulum().getLength() * Math.cos(theta1) / 2
+                        - this.doublePendulum.getSecondPendulum().getMass() * App.G * this.doublePendulum.getFirstPendulum().getLength() * Math.cos(theta1)
+                        - this.doublePendulum.getSecondPendulum().getMass() * App.G * this.doublePendulum.getSecondPendulum().getLength() * Math.cos(theta2) / 2
+        );
     }
 
     double omega1Derivative(double theta1, double theta2, double omega1, double omega2) {
@@ -80,8 +110,8 @@ public class EulerSolver {
                         + 12 * this.doublePendulum.getSecondPendulum().getMass() * this.doublePendulum.getSecondPendulum().getLength() * omega2 * omega2 * Math.sin(theta1 - theta2)
                         + 12 * (3 * Math.sin(- 2 * theta2 + theta1) * this.doublePendulum.getSecondPendulum().getMass() / 4 + Math.sin(theta1) * (this.doublePendulum.getFirstPendulum().getMass() + 5 * this.doublePendulum.getSecondPendulum().getMass() / 4)) * App.G
 
-        )
-                / (
+)
+/ (
                 this.doublePendulum.getFirstPendulum().getLength() * (9 * this.doublePendulum.getSecondPendulum().getMass() * Math.cos(2 * theta1 - 2 * theta2) - 8 * this.doublePendulum.getFirstPendulum().getMass() - 15 * this.doublePendulum.getSecondPendulum().getMass())
         );
     }

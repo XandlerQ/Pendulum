@@ -6,12 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="2aae3bae-2380-4847-8b1b-2a0f52d7115a" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Pendulum/App.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Pendulum/App.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Pendulum/TimeGraph.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Pendulum/TimeGraph.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Initializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Initializer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/EulerSolver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/EulerSolver.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Pandemonium.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Pandemonium.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TimeGraph.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TimeGraph.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RungeKuttaSolver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/RungeKuttaSolver.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

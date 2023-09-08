@@ -7,6 +7,7 @@ public class Pandemonium {
     private TimeGraph theta2Graph;
     private TimeGraph omega1Graph;
     private TimeGraph omega2Graph;
+    private TimeGraph energyGraph;
     private Initializer initializer;
     private EulerSolver eulerSolver;
     private RungeKuttaSolver rungeKuttaSolver;
@@ -75,7 +76,7 @@ public class Pandemonium {
 
             this.animationStep = this.animationLength / graphCapacity;
 
-            this.theta1Graph = new TimeGraph(1000, 500, graphCapacity);
+            this.theta1Graph = new TimeGraph(1000, 300, graphCapacity);
             this.theta1Graph.setTitle("Theta");
             this.theta1Graph.setOrigin(1000, 0);
             this.theta1Graph.setPlainCl(new Color(0, 0, 0));
@@ -90,7 +91,7 @@ public class Pandemonium {
             this.theta1Graph.setInteger(false);
             this.theta1Graph.setScaleSynchronizer(thetaScaleSynchronizer);
 
-            this.theta2Graph = new TimeGraph(1000, 500, graphCapacity);
+            this.theta2Graph = new TimeGraph(1000, 300, graphCapacity);
             this.theta2Graph.setTitle("");
             this.theta2Graph.setOrigin(1000, 0);
             this.theta2Graph.setPlainCl(new Color(0, 0, 0, 0));
@@ -110,9 +111,9 @@ public class Pandemonium {
 
             ScaleSynchronizer omegaScaleSynchronizer = new ScaleSynchronizer();
 
-            this.omega1Graph = new TimeGraph(1000, 500, graphCapacity);
+            this.omega1Graph = new TimeGraph(1000, 300, graphCapacity);
             this.omega1Graph.setTitle("Omega");
-            this.omega1Graph.setOrigin(1000, 500);
+            this.omega1Graph.setOrigin(1000, 300);
             this.omega1Graph.setPlainCl(new Color(0, 0, 0));
             this.omega1Graph.setBorderCl(new Color(100, 100, 100));
             this.omega1Graph.setDotCl(Color.RED);
@@ -125,9 +126,9 @@ public class Pandemonium {
             this.omega1Graph.setInteger(false);
             this.omega1Graph.setScaleSynchronizer(omegaScaleSynchronizer);
 
-            this.omega2Graph = new TimeGraph(1000, 500, graphCapacity);
+            this.omega2Graph = new TimeGraph(1000, 300, graphCapacity);
             this.omega2Graph.setTitle("");
-            this.omega2Graph.setOrigin(1000, 500);
+            this.omega2Graph.setOrigin(1000, 300);
             this.omega2Graph.setPlainCl(new Color(0, 0, 0, 0));
             this.omega2Graph.setBorderCl(new Color(100, 100, 100));
             this.omega2Graph.setDotCl(Color.BLUE);
@@ -142,6 +143,20 @@ public class Pandemonium {
 
             omegaScaleSynchronizer.addGraph(omega1Graph);
             omegaScaleSynchronizer.addGraph(omega2Graph);
+
+            this.energyGraph = new TimeGraph(1000, 300, graphCapacity);
+            this.energyGraph.setTitle("Theta");
+            this.energyGraph.setOrigin(1000, 600);
+            this.energyGraph.setPlainCl(new Color(0, 0, 0));
+            this.energyGraph.setBorderCl(new Color(100, 100, 100));
+            this.energyGraph.setDotCl(Color.WHITE);
+            this.energyGraph.setLineCl(Color.WHITE);
+            this.energyGraph.setLevelLineCl(Color.WHITE);
+            this.energyGraph.setValueTextCl(Color.WHITE);
+            this.energyGraph.setTitleTextCl(Color.WHITE);
+            this.energyGraph.setScaleTextCl(Color.WHITE);
+            this.energyGraph.setTextSize(8);
+            this.energyGraph.setInteger(false);
         }
     }
 
@@ -166,6 +181,7 @@ public class Pandemonium {
         this.theta2Graph.clear();
         this.omega1Graph.clear();
         this.omega2Graph.clear();
+        this.energyGraph.clear();
     }
 
     void animate() {
@@ -177,18 +193,21 @@ public class Pandemonium {
         double theta2 = 0;
         double omega1 = 0;
         double omega2 = 0;
+        double energy = 0;
         switch (this.solverType) {
             case 0 -> {
                 theta1 = this.eulerSolver.getTheta1().get(this.animationTick);
                 theta2 = this.eulerSolver.getTheta2().get(this.animationTick);
                 omega1 = this.eulerSolver.getOmega1().get(this.animationTick);
                 omega2 = this.eulerSolver.getOmega2().get(this.animationTick);
+                energy = this.eulerSolver.getEnergy().get(this.animationTick);
             }
             case 1 -> {
                 theta1 = this.rungeKuttaSolver.getTheta1().get(this.animationTick);
                 theta2 = this.rungeKuttaSolver.getTheta2().get(this.animationTick);
                 omega1 = this.rungeKuttaSolver.getOmega1().get(this.animationTick);
                 omega2 = this.rungeKuttaSolver.getOmega2().get(this.animationTick);
+                energy = this.rungeKuttaSolver.getEnergy().get(this.animationTick);
             }
         }
 
@@ -204,6 +223,7 @@ public class Pandemonium {
             this.theta2Graph.addValue(theta2);
             this.omega1Graph.addValue(omega1);
             this.omega2Graph.addValue(omega2);
+            this.energyGraph.addValue(energy);
         }
 
         this.doublePendulum.render();
@@ -211,6 +231,7 @@ public class Pandemonium {
         this.theta2Graph.render();
         this.omega1Graph.render();
         this.omega2Graph.render();
+        this.energyGraph.render();
 
         this.animationTick += 1;
 
