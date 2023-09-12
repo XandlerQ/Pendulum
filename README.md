@@ -1,2 +1,2 @@
 # Pendulum
-Double pendulum oscillation system numerical solver 
+Double compound pendulum oscillation system numerical solver.
